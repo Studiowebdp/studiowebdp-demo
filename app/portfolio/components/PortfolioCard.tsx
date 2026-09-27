@@ -34,9 +34,9 @@ export default function PortfolioCard({ project }: PortfolioCardProps) {
       <div className="p-6 flex flex-col flex-grow">
         {/* Cliente e anno */}
         <div className="flex items-center gap-3 text-xs font-semibold text-slate-500 mb-3">
-          <span>{project.client}</span>
-          <span>·</span>
-          <span>{project.year}</span>
+          {project.client && <span>{project.client}</span>}
+          {project.client && project.year && <span>·</span>}
+          {project.year && <span>{project.year}</span>}
         </div>
 
         {/* Titolo */}
@@ -50,16 +50,18 @@ export default function PortfolioCard({ project }: PortfolioCardProps) {
         </p>
 
         {/* Servizi */}
-        <div className="flex flex-wrap gap-2 mb-4">
-          {project.services.slice(0, 3).map((service) => (
-            <span
-              key={service}
-              className="text-[10px] font-bold uppercase tracking-wider text-blue-600 bg-blue-50 px-2 py-1 rounded"
-            >
-              {service}
-            </span>
-          ))}
-        </div>
+        {project.services && project.services.length > 0 && (
+          <div className="flex flex-wrap gap-2 mb-4">
+            {project.services.slice(0, 3).map((service: string) => (
+              <span
+                key={service}
+                className="text-[10px] font-bold uppercase tracking-wider text-blue-600 bg-blue-50 px-2 py-1 rounded"
+              >
+                {service}
+              </span>
+            ))}
+          </div>
+        )}
 
         {/* CTA */}
         <div className="pt-4 border-t border-slate-100 text-sm font-bold text-blue-600 group-hover:text-orange-500 transition-colors">
