@@ -152,18 +152,29 @@ export default async function PostPage({ params }: Props) {
 
         {/* Contenuto MDX principale */}
         <div className="prose prose-slate prose-lg max-w-none
-          prose-headings:text-slate-900 prose-headings:font-extrabold
-          prose-a:text-blue-600 prose-a:no-underline prose-a:font-semibold
-          hover:prose-a:text-orange-500 hover:prose-a:underline
-          prose-strong:text-slate-900 prose-strong:font-bold
-          prose-p:leading-relaxed prose-p:text-slate-600
-          prose-blockquote:border-l-4 prose-blockquote:border-blue-500
-          prose-blockquote:bg-blue-50/50 prose-blockquote:py-2 prose-blockquote:px-6
-          prose-blockquote:rounded-r-xl prose-blockquote:not-italic
-          prose-code:text-blue-700 prose-code:bg-blue-50
-          prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded
-          prose-code:before:content-none prose-code:after:content-none
-        ">
+  prose-headings:text-slate-900 prose-headings:font-extrabold
+  prose-h2:text-3xl prose-h2:mt-16 prose-h2:mb-6 prose-h2:pb-3 prose-h2:border-b prose-h2:border-slate-100
+  prose-h3:text-2xl prose-h3:mt-10 prose-h3:mb-4
+  prose-a:text-blue-600 prose-a:no-underline prose-a:font-semibold
+  hover:prose-a:text-orange-500 hover:prose-a:underline
+  prose-strong:text-slate-900 prose-strong:font-bold
+  prose-p:text-slate-700 prose-p:leading-[1.85] prose-p:text-[1.125rem] prose-p:my-6
+  prose-ul:my-8 prose-ul:space-y-3
+  prose-ol:my-8 prose-ol:space-y-3
+  prose-li:text-slate-700 prose-li:leading-relaxed
+  prose-blockquote:border-l-4 prose-blockquote:border-blue-500
+  prose-blockquote:bg-blue-50/50 prose-blockquote:py-4 prose-blockquote:px-8
+  prose-blockquote:rounded-r-xl prose-blockquote:not-italic
+  prose-blockquote:text-slate-700 prose-blockquote:text-lg
+  prose-code:text-blue-700 prose-code:bg-blue-50
+  prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded
+  prose-code:before:content-none prose-code:after:content-none
+  prose-table:my-8 prose-table:text-base prose-table:w-full
+  prose-th:bg-slate-100 prose-th:p-4 prose-th:text-left prose-th:font-bold prose-th:text-slate-900
+  prose-td:p-4 prose-td:border-t prose-td:border-slate-100 prose-td:align-top prose-td:text-slate-700
+  prose-tr:border-b prose-tr:border-slate-100
+  prose-hr:my-16 prose-hr:border-slate-200
+">
           <MDXRemote
   source={post.content}
   options={{
