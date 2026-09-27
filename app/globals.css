@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 :root {
   --background: #ffffff;
@@ -23,4 +24,194 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ============================================ */
+/* STILE ARTICOLI BLOG - .prose                 */
+/* ============================================ */
+
+/* Variabili colore del plugin typography */
+.prose {
+  --tw-prose-body: #475569;
+  --tw-prose-headings: #0f172a;
+  --tw-prose-links: #007cf0;
+  --tw-prose-bold: #0f172a;
+  --tw-prose-quotes: #0f172a;
+  --tw-prose-quote-borders: #fcc201;
+  --tw-prose-bullets: #007cf0;
+}
+
+/* Immagini con angoli arrotondati */
+.prose img {
+  border-radius: 1.5rem;
+  box-shadow: 0 10px 30px rgba(29, 36, 60, 0.08);
+}
+
+/* Titoli H2 con spaziatura in stile WordPress */
+.prose h2 {
+  margin-top: 2.5em;
+  margin-bottom: 0.8em;
+  padding-bottom: 0.4em;
+  border-bottom: 3px solid #007cf0;
+}
+
+/* Paragrafi */
+.prose p {
+  margin-bottom: 1.5em;
+  line-height: 1.75;
+}
+
+/* ============================================ */
+/* LINK ARTICOLI - rimuove la sottolineatura     */
+/* ============================================ */
+.prose a {
+  text-decoration: none !important;
+  font-weight: 600;
+  color: #2563eb;
+  transition: color 0.2s ease;
+}
+
+.prose a:hover {
+  text-decoration: underline !important;
+  color: #f97316;
+}
+
+/* Grassetti dentro i link (evita doppia sottolineatura) */
+.prose a strong,
+.prose strong a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.prose a strong:hover,
+.prose strong a:hover {
+  text-decoration: underline;
+}
+
+/* ============================================ */
+/* LISTE PUNTATE                                 */
+/* ============================================ */
+.prose ul li::marker,
+.prose ol li::marker {
+  color: #007cf0;
+}
+
+/* ============================================ */
+/* BLOCKQUOTE - stile WordPress unificato        */
+/* ============================================ */
+.prose blockquote {
+  background: #f8faff;
+  border-left: 4px solid #007cf0;
+  padding: 1.5rem 2rem;
+  border-radius: 1rem;
+  font-style: normal;
+  border-top: 1px solid #f1f5f9;
+  border-right: 1px solid #f1f5f9;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.prose blockquote p {
+  font-style: normal;
+}
+
+.prose blockquote p::before,
+.prose blockquote p::after {
+  content: none;
+}
+
+.confronto-tabella {
+  margin: 40px 0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(29, 36, 60, 0.08);
+  font-family: 'Poppins', sans-serif;
+}
+
+.confronto-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  background: linear-gradient(97deg, #007cf0, #00dfd8);
+  color: #fff;
+  font-weight: 700;
+  font-size: 16px;
+  padding: 18px 20px;
+  gap: 15px;
+}
+
+.confronto-header > div {
+  text-align: center;
+}
+
+.confronto-header > div:first-child {
+  text-align: left;
+}
+
+.confronto-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: 20px;
+  gap: 15px;
+  align-items: center;
+  background: #fff;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.confronto-row.alternata {
+  background: #f8faff;
+}
+
+.confronto-row:last-child {
+  border-bottom: none;
+}
+
+.confronto-label {
+  font-weight: 700;
+  color: #1D243C;
+  font-size: 16px;
+}
+
+.confronto-row > div:not(.confronto-label) {
+  text-align: center;
+}
+
+.confronto-stelle {
+  font-size: 18px;
+  letter-spacing: 2px;
+  margin-bottom: 6px;
+}
+
+.confronto-icona {
+  font-size: 22px;
+  margin-bottom: 6px;
+}
+
+.confronto-desc {
+  font-size: 14px;
+  color: #475569;
+  line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+  .confronto-header {
+    grid-template-columns: 1fr;
+    text-align: center;
+    font-size: 15px;
+  }
+
+  .confronto-header > div:first-child {
+    text-align: center;
+  }
+
+  .confronto-row {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding: 20px 15px;
+  }
+
+  .confronto-label {
+    font-size: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #007cf0;
+    margin-bottom: 10px;
+  }
 }
