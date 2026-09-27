@@ -1,11 +1,11 @@
 // app/blog/components/BlogCard.tsx
 import Link from 'next/link';
 import Image from 'next/image';
-import { PostMeta } from '@/lib/mdx';
+import { PostMeta } from '@/lib/types';
 
 interface BlogCardProps {
   post: PostMeta;
-  basePath?: string; // 'blog' o 'portfolio'
+  basePath?: string;
 }
 
 export default function BlogCard({ post, basePath = 'blog' }: BlogCardProps) {
@@ -25,9 +25,9 @@ export default function BlogCard({ post, basePath = 'blog' }: BlogCardProps) {
       </div>
 
       <div className="p-6 flex flex-col flex-grow">
-        {post.tags.length > 0 && (
+        {post.tags && post.tags.length > 0 && (
           <div className="flex flex-wrap gap-2 mb-3">
-            {post.tags.slice(0, 2).map((tag) => (
+            {post.tags.slice(0, 2).map((tag: string) => (
               <span
                 key={tag}
                 className="text-[10px] font-bold uppercase tracking-wider text-blue-600 bg-blue-50 px-2 py-1 rounded"

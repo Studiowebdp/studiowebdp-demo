@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 };
 
 export default function BlogPage() {
-  const posts = getAllPosts('blog');
+  const posts = getAllPosts();
 
   return (
     <main className="bg-white text-slate-700 font-sans overflow-x-hidden">
