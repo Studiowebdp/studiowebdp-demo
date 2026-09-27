@@ -6,7 +6,7 @@ interface CaseStudyFooterProps {
   title: string;
   description: string;
   ctaText: string;
-  ctaHref: string;
+  ctaHref?: string;
   ctaEmoji?: string;
 }
 
@@ -15,7 +15,7 @@ export function CaseStudyFooter({
   title,
   description,
   ctaText,
-  ctaHref,
+  ctaHref = '#',
   ctaEmoji = '🚀',
 }: CaseStudyFooterProps) {
   const renderTitleWithGradient = (text: string) => {
@@ -43,13 +43,20 @@ export function CaseStudyFooter({
       <div className="text-base md:text-lg text-slate-600 max-w-2xl mx-auto mb-8 leading-relaxed">
         {description}
       </div>
-      <Link
-        href={ctaHref}
-        className="inline-flex items-center justify-center gap-2 bg-gradient-to-b from-yellow-300 to-yellow-400 hover:from-yellow-400 hover:to-yellow-500 text-slate-900 font-bold px-6 py-4 rounded-lg shadow-lg shadow-yellow-200/60 border border-yellow-500/40 transition-all hover:-translate-y-0.5"
-      >
-        <span className="text-xl leading-none">{ctaEmoji}</span>
-        {ctaText}
-      </Link>
+      {ctaHref ? (
+        <Link
+          href={ctaHref}
+          className="inline-flex items-center justify-center gap-2 bg-gradient-to-b from-yellow-300 to-yellow-400 hover:from-yellow-400 hover:to-yellow-500 text-slate-900 font-bold px-6 py-4 rounded-lg shadow-lg shadow-yellow-200/60 border border-yellow-500/40 transition-all hover:-translate-y-0.5"
+        >
+          <span className="text-xl leading-none">{ctaEmoji}</span>
+          {ctaText}
+        </Link>
+      ) : (
+        <span className="inline-flex items-center justify-center gap-2 bg-gradient-to-b from-yellow-300 to-yellow-400 text-slate-900 font-bold px-6 py-4 rounded-lg shadow-lg shadow-yellow-200/60 border border-yellow-500/40">
+          <span className="text-xl leading-none">{ctaEmoji}</span>
+          {ctaText}
+        </span>
+      )}
     </div>
   );
 }

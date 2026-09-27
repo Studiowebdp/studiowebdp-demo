@@ -174,17 +174,16 @@ export default async function PostPage({ params }: Props) {
 />
         </div>
 
-        {/* CTA finale (dal frontmatter) */}
-        {post.ctaFooter && (
-          <CaseStudyFooter
-            emoji={post.ctaFooter.emoji}
-            title={post.ctaFooter.title}
-            description={post.ctaFooter.description}
-            ctaText={post.ctaFooter.ctaText}
-            ctaHref={post.ctaFooter.ctaHref}
-            ctaEmoji={post.ctaFooter.ctaEmoji}
-          />
-        )}
+        {post.ctaFooter?.ctaHref && (
+  <CaseStudyFooter
+    emoji={post.ctaFooter.emoji}
+    title={post.ctaFooter.title}
+    description={post.ctaFooter.description}
+    ctaText={post.ctaFooter.ctaText}
+    ctaHref={post.ctaFooter.ctaHref}
+    ctaEmoji={post.ctaFooter.ctaEmoji}
+  />
+)}
       </article>
     </main>
   );
