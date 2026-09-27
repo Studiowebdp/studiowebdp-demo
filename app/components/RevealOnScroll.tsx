@@ -1,13 +1,13 @@
-"use client";
+// app/components/RevealOnScroll.tsx
+'use client';
 
-import { motion } from "framer-motion";
-import { ReactNode } from "react";
+import { useEffect, useRef, useState, ReactNode, CSSProperties } from 'react';
 
 type Props = {
   children: ReactNode;
   delay?: number;
   /** Direzione di ingresso */
-  from?: "bottom" | "top" | "left" | "right";
+  from?: 'bottom' | 'top' | 'left' | 'right';
   /** Distanza in px */
   distance?: number;
   /** Durata in secondi */
@@ -18,30 +18,58 @@ type Props = {
 export default function RevealOnScroll({
   children,
   delay = 0,
-  from = "bottom",
+  from = 'bottom',
   distance = 40,
   duration = 0.7,
   className,
 }: Props) {
-  const initial = {
-    opacity: 0,
-    y: from === "bottom" ? distance : from === "top" ? -distance : 0,
-    x: from === "right" ? distance : from === "left" ? -distance : 0,
+  const ref = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1, rootMargin: '-80px 0px -80px 0px' }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  // Calcola la trasformazione iniziale in base alla direzione
+  const getInitialTransform = (): string => {
+    switch (from) {
+      case 'bottom':
+        return `translateY(${distance}px)`;
+      case 'top':
+        return `translateY(-${distance}px)`;
+      case 'left':
+        return `translateX(-${distance}px)`;
+      case 'right':
+        return `translateX(${distance}px)`;
+      default:
+        return `translateY(${distance}px)`;
+    }
+  };
+
+  const style: CSSProperties = {
+    opacity: isVisible ? 1 : 0,
+    transform: isVisible ? 'translate(0, 0)' : getInitialTransform(),
+    transition: `opacity ${duration}s cubic-bezier(0.22, 1, 0.36, 1) ${delay}s, transform ${duration}s cubic-bezier(0.22, 1, 0.36, 1) ${delay}s`,
+    willChange: isVisible ? 'auto' : 'opacity, transform',
   };
 
   return (
-    <motion.div
-      className={className}
-      initial={initial}
-      whileInView={{ opacity: 1, y: 0, x: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{
-        duration,
-        delay,
-        ease: [0.22, 1, 0.36, 1], // easing tipo StringTune (f-cubic)
-      }}
-    >
+    <div ref={ref} style={style} className={className}>
       {children}
-    </motion.div>
+    </div>
   );
 }

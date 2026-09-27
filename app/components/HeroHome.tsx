@@ -1,13 +1,20 @@
+// app/components/HeroHome.tsx
 "use client";
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import TypewriterText from "./TypewriterText";
 
-const easeExpo = [0.16, 1, 0.3, 1] as const;
-
 export default function HeroHome() {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    // Piccolo delay per far partire l'animazione dopo il mount
+    const timer = setTimeout(() => setIsVisible(true), 50);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <section className="relative overflow-hidden bg-white pt-16 pb-20 md:pt-24 md:pb-28">
       <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-[62fr_38fr] gap-12 items-center">
@@ -15,19 +22,29 @@ export default function HeroHome() {
         <div>
           {/* Titolo con split + typed */}
           <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-[52px] font-extrabold leading-[1.15] text-slate-900 mb-5">
-            <motion.span
-              initial={{ y: -80, opacity: 0, rotateX: 25 }}
-              animate={{ y: 0, opacity: 1, rotateX: 0 }}
-              transition={{ duration: 1.2, ease: easeExpo }}
-              className="block"
+            {/* Riga 1 - animazione y: -80, rotateX: 25, durata 1.2s */}
+            <span
+              className="block transition-all duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
+              style={{
+                transform: isVisible
+                  ? 'translateY(0) rotateX(0deg)'
+                  : 'translateY(-80px) rotateX(25deg)',
+                opacity: isVisible ? 1 : 0,
+                transformOrigin: 'top center',
+                perspective: '1000px',
+              }}
             >
               Aiuto professionisti e PMI a scalare il mercato digitale con siti web ed e-commerce
-            </motion.span>
-            <motion.span
-              initial={{ y: -40, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 1, delay: 0.3, ease: easeExpo }}
-              className="inline-block"
+            </span>
+
+            {/* Riga 2 - animazione y: -40, delay 0.3s, durata 1s */}
+            <span
+              className="inline-block transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)]"
+              style={{
+                transform: isVisible ? 'translateY(0)' : 'translateY(-40px)',
+                opacity: isVisible ? 1 : 0,
+                transitionDelay: '0.3s',
+              }}
             >
               <TypewriterText
                 strings={[
@@ -40,28 +57,32 @@ export default function HeroHome() {
                 backSpeed={30}
                 className="bg-gradient-to-r from-blue-600 to-cyan-400 bg-clip-text text-transparent"
               />
-            </motion.span>
+            </span>
           </h1>
 
-          {/* Sottotitolo */}
-          <motion.p
-            initial={{ x: -60, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 1, delay: 0.5, ease: easeExpo }}
-            className="text-lg leading-relaxed text-slate-600 max-w-2xl mb-6"
+          {/* Sottotitolo - animazione x: -60, delay 0.5s, durata 1s */}
+          <p
+            className="text-lg leading-relaxed text-slate-600 max-w-2xl mb-6 transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)]"
+            style={{
+              transform: isVisible ? 'translateX(0)' : 'translateX(-60px)',
+              opacity: isVisible ? 1 : 0,
+              transitionDelay: '0.5s',
+            }}
           >
             Sono il tuo referente unico per la creazione, la gestione e il
             posizionamento del tuo sito o del tuo negozio online. Un supporto
             diretto, senza intermediari, per far crescere la tua attività
             online.
-          </motion.p>
+          </p>
 
-          {/* Bottoni */}
-          <motion.div
-            initial={{ y: 40, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.9, delay: 0.7, ease: easeExpo }}
-            className="flex flex-col sm:flex-row gap-4 mt-6"
+          {/* Bottoni - animazione y: 40, delay 0.7s, durata 0.9s */}
+          <div
+            className="flex flex-col sm:flex-row gap-4 mt-6 transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
+            style={{
+              transform: isVisible ? 'translateY(0)' : 'translateY(40px)',
+              opacity: isVisible ? 1 : 0,
+              transitionDelay: '0.7s',
+            }}
           >
             <Link
               href="#contattami"
@@ -75,16 +96,19 @@ export default function HeroHome() {
             >
               Portfolio
             </Link>
-          </motion.div>
+          </div>
         </div>
 
-        {/* FOTO PROFILO */}
+        {/* FOTO PROFILO - animazione x: 120, y: 60, rotate: 12, scale: 0.85, durata 1.4s */}
         <div className="relative flex justify-center">
-          <motion.div
-            initial={{ x: 120, y: 60, rotate: 12, scale: 0.85, opacity: 0 }}
-            animate={{ x: 0, y: 0, rotate: 0, scale: 1, opacity: 1 }}
-            transition={{ duration: 1.4, ease: easeExpo }}
-            className="relative w-full max-w-md"
+          <div
+            className="relative w-full max-w-md transition-all duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
+            style={{
+              transform: isVisible
+                ? 'translateX(0) translateY(0) rotate(0deg) scale(1)'
+                : 'translateX(120px) translateY(60px) rotate(12deg) scale(0.85)',
+              opacity: isVisible ? 1 : 0,
+            }}
           >
             <Image
               src="/images/foto-profilo.webp"
@@ -95,7 +119,7 @@ export default function HeroHome() {
               priority
               sizes="(max-width: 768px) 90vw, 40vw"
             />
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

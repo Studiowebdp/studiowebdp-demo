@@ -1,6 +1,7 @@
-"use client";
+// app/components/SplitText.tsx
+'use client';
 
-import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from 'react';
 
 type Props = {
   text: string;
@@ -13,34 +14,52 @@ type Props = {
 
 export default function SplitText({
   text,
-  className = "",
+  className = '',
   delay = 0,
   stagger = 0.08,
 }: Props) {
-  const words = text.split(" ");
+  const ref = useRef<HTMLSpanElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  const words = text.split(' ');
 
   return (
-    <span className={className} aria-label={text}>
+    <span ref={ref} className={className} aria-label={text}>
       {words.map((word, i) => (
         <span
           key={i}
           className="inline-block overflow-hidden align-bottom"
           aria-hidden="true"
         >
-          <motion.span
-            className="inline-block"
-            initial={{ y: "100%", opacity: 0 }}
-            whileInView={{ y: "0%", opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{
-              duration: 0.6,
-              delay: delay + i * stagger,
-              ease: [0.22, 1, 0.36, 1],
+          <span
+            className="inline-block transition-transform duration-600 ease-[cubic-bezier(0.22,1,0.36,1)]"
+            style={{
+              transform: isVisible ? 'translateY(0%)' : 'translateY(100%)',
+              opacity: isVisible ? 1 : 0,
+              transitionDelay: `${delay + i * stagger}s`,
             }}
           >
             {word}
-            {i < words.length - 1 ? "\u00A0" : ""}
-          </motion.span>
+            {i < words.length - 1 ? '\u00A0' : ''}
+          </span>
         </span>
       ))}
     </span>
