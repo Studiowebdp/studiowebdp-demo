@@ -111,14 +111,15 @@ export default function HeroHome() {
             }}
           >
             <Image
-              src="/images/foto-profilo.webp"
-              alt="Stefano De Pasqual - Specialista WordPress & E-commerce"
-              width={610}
-              height={900}
-              className="w-full h-auto object-contain"
-              priority
-              sizes="(max-width: 768px) 90vw, 40vw"
-            />
+  src="/images/foto-profilo.webp"
+  alt="Stefano De Pasqual - Specialista WordPress & E-commerce"
+  width={610}
+  height={900}
+  className="w-full h-auto object-contain"
+  priority
+  fetchPriority="high"
+  sizes="(max-width: 768px) 90vw, 40vw"
+/>
           </div>
         </div>
       </div>
