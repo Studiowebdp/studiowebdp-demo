@@ -1,0 +1,3 @@
+# Blocco indicizzazione demo
+User-agent: *
+Disallow: /
