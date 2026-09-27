@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { MDXRemote } from 'next-mdx-remote/rsc';
+import remarkGfm from 'remark-gfm';
 import { getAllPortfolioProjects, getPostBySlug } from '@/lib/mdx';
 import JsonLd from '@/app/components/JsonLd';
 
@@ -198,7 +199,14 @@ export default async function ProjectPage({ params }: Props) {
           prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded
           prose-code:before:content-none prose-code:after:content-none
         ">
-          <MDXRemote source={project.content} />
+          <MDXRemote
+  source={project.content}
+  options={{
+    mdxOptions: {
+      remarkPlugins: [remarkGfm],
+    },
+  }}
+/>
         </div>
       </article>
 

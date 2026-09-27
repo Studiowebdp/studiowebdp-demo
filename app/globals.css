@@ -215,3 +215,65 @@ body {
     margin-bottom: 10px;
   }
 }
+
+/* Stili tabelle markdown negli articoli */
+.prose table,
+article table,
+.entry-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(29, 36, 60, 0.08);
+  font-size: 15px;
+}
+
+.prose thead,
+article thead,
+.entry-content thead {
+  background: linear-gradient(97deg, #007cf0, #00dfd8);
+  color: #ffffff;
+}
+
+.prose th,
+article th,
+.entry-content th {
+  padding: 14px 18px;
+  text-align: left;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+}
+
+.prose td,
+article td,
+.entry-content td {
+  padding: 14px 18px;
+  border-bottom: 1px solid #f1f5f9;
+  color: #3F4C7C;
+  vertical-align: top;
+}
+
+.prose tbody tr:nth-child(even),
+article tbody tr:nth-child(even),
+.entry-content tbody tr:nth-child(even) {
+  background: #f8faff;
+}
+
+.prose tbody tr:hover,
+article tbody tr:hover,
+.entry-content tbody tr:hover {
+  background: #eef2ff;
+  transition: background 0.2s ease;
+}
+
+@media (max-width: 768px) {
+  .prose table,
+  article table,
+  .entry-content table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
